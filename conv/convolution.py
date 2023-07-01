@@ -1,19 +1,9 @@
 import numpy as np
-from scipy.signal import convolve2d
 from PIL import Image
 import math
 
 # MaxPooling
 import pooling as pl
-
-# Open the image file
-img = Image.open("mila.jpg")
-img = img.convert("L")
-img = np.array(img)
-
-'''img = np.array([[1, 2, 3],
-                  [4, 5, 6],
-                  [7, 8, 9]])'''
 
 # Gaussian blur 3x3 kernel
 blur = np.array([[1, 2, 1],
@@ -68,10 +58,14 @@ def convolve(img: np.array, kernel: np.array, stride: int = 1, padding: int = 1)
 
 # Teste
 
+img = Image.open("../imgs/puc.png")
+img = img.convert("L")
+img = np.array(img)
+
 kernel = laplace_gauss
 
 m = convolve(img, kernel, stride=1, padding=1)
-m = pl.maxpooling(m, (5, 5), 1)
+m = pl.maxpooling(img, (2, 2), 2)
 
 final = Image.fromarray(m)
 final.show()
